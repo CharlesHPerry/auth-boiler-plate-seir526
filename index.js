@@ -24,6 +24,9 @@ app.get('/', (req, res) => {
     //check that user is logged in
     res.render('index');
 })
+// include auth controller
+
+app.use('/auth', require('./controllers/auth'));
 
 //initialize app on port
 
