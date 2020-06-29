@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require('../models');
 //import middleware
 const flash = require('flash');
-const e = require('express');
 
 //register get route
 router.get('/register', function(req, res) {
@@ -40,5 +39,8 @@ router.post('/register', function(req, res) {
 router.get('/login', function(req, res) {
     res.render('auth/login');
 })
+//login Post route
+
+
 
 module.exports = router;
