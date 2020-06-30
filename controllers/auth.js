@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-//import middleware
 const flash = require('flash');
-//TODO: update require below
 const passport = require('../config/ppConfig');
 
 //register get route
