@@ -4,7 +4,7 @@ const db = require('../models');
 //import middleware
 const flash = require('flash');
 //TODO: update require below
-const passport = require('passport');
+const passport = require('../config/ppConfig');
 
 //register get route
 router.get('/register', function(req, res) {
