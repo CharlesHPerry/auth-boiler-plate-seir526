@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(function(req ,res, next) {
-    res.locals.alert = req.flash();
+    res.locals.alerts = req.flash();
     res.locals.currentUser = req.user;
 
     next();
@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile', {test: 'another test'});
+    res.render('profile');
 })
 
 // include auth controller

@@ -22,7 +22,10 @@ router.post('/register', function(req, res) {
         if (created) {
             //authenticate user and start authorization process
             console.log('user created 🤒')
-            res.redirect('/')
+            passport.authenticate('local', {
+                successRedirect: '/profile',
+                successFlash: "Thanks for signing up!"
+            })(req, res);
         } else {
             console.log('user email already exists 🚫')
             req.flash('error', 'Error: email already exists for user. Try again.');
@@ -46,7 +49,7 @@ router.post('/login', function(req, res, next) {
         if (!user) {
             req.flash('error', 'Invalid username or password');
             req.session.save(function() {
-                return res.redirect('auth/login');
+                return res.redirect('/auth/login');
             })
             //redirect our user to try login again
         }
@@ -54,7 +57,7 @@ router.post('/login', function(req, res, next) {
             return next(error);
         }
 
-        req.login(function(user, error) {
+        req.login(user, function(error) {
             //if error move to error
             if (error) next(error);
             //if success flash success
@@ -64,7 +67,7 @@ router.post('/login', function(req, res, next) {
                 return res.redirect('/');
             })
         })
-    })
+    })(req, res, next);
 })
 
 router.post('/login', passport.authenticate('local', {
@@ -73,6 +76,11 @@ router.post('/login', passport.authenticate('local', {
     successFlash: 'welcome to our app!',
     failureFlash: 'Invalid username or password.'
 }));
+
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+})
 
 
 module.exports = router;

@@ -57,5 +57,4 @@ module.exports = function(sequelize, DataTypes) {
         return userData;
     }
     return user;
-    
 };   
